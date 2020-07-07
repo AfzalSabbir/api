@@ -1,0 +1,13 @@
+/nc_assets
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+/resources/views/backend/pages/root/Importants/sublime/Color*Highlight.cache
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.env

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue.js</title>
+		<link rel="stylesheet" href="../bootstrap.min.css">
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<main class="container" id="app">
+			<div class="row">
+				<ul class="list-group col-md-4 mx-auto mt-3">
+					<li class="list-group-item" style="cursor: pointer" v-for="fruit in fruits">
+						{{ fruit.name }}
+						<span class="float-right mr-3">
+							<span class="badge badge-pill badge-success">{{ fruit.count }}</span>
+							<span class="badge badge-pill badge-dark">{{ fruit.price }}</span>
+						</span>
+						<span class="btn-group-vertical position-absolute" style="width: 30px;text-align: center; top: 1px; right: 1px;">
+							<span class="btn btn-sm btn-secondary py-0" @click="count(fruit, true)">+</span>
+							<span class="btn btn-sm btn-secondary py-0" @click="count(fruit, false)">-</span>
+						</span>
+					</li>
+					<li class="list-group-item bg-secondary text-white">
+						Report:
+						<span class="badge badge-pill badge-dark float-right">{{ total_price }}</span>
+						<span class="badge badge-pill badge-success float-right">{{ total_count }}</span>
+					</li>
+				</ul>
+			</div>
+
+			<div class="row d-none">
+				<h1>{{ message }}</h1>
+				<input type="text" class="form-control" v-model="message" >
+				<button v-bind:class="button_I_O_class" :title="button_I_O" class="btn my-2 w-100" @click="showLists(show)">{{ button_I_O }} Lists</button>
+				<h1 :class="{'alert alert-info': show}" class="d-none"><span v-html="messageHtml"></span></h1>
+				<div v-if="show">
+					<ul class="list-group">
+						<li v-for="(list, key) in lists" class="list-group-item border-0 p-0 m-0">{{ key+1 }}. {{ list }}</li>
+					</ul>
+					<input type="text" class="form-control" v-model="newList">
+					<button @click="addInList" type="button" class="btn btn-info my-2">Add</button>
+				</div>
+			</div>
+			<div class="row d-none">
+				<input type="number" v-model="km">
+				<input type="number" v-model="m">
+				<input type="text" v-model="convert">
+			</div>
+			<div class="row d-none">
+				<input type="text" v-model="FullName">
+				<h3 class="w-100">{{ FirstName }}</h3>
+				<h3 class="w-100">{{ LastName }}</h3>
+			</div>
+		</main>
+
+		<script>
+			new Vue({
+			
+				el: "#app",
+				data: {
+					km: 0,
+					m: 0,
+					newList: '',
+					message: "This is a VUE message",
+					messageHtml: "<code>This is a VUE message</code>",
+					show: false,
+					button_I_O_class: 'btn-success',
+					lists: ['One','Two','Three','Four'],
+
+					total_count: 0,
+					total_price: 0,
+					fruits: [
+						{
+							name: 'Banana',
+							price: 4,
+							count: 0,
+						},
+						{
+							name: 'Apple',
+							price: 18,
+							count: 0,
+						},
+						{
+							name: 'Mango',
+							price: 15,
+							count: 0,
+						},
+					],
+					button_I_O: "Show",
+					FirstName: "Afzal",
+					LastName: "Sabbir",
+				},
+				methods: {
+					addInList:function(){
+						this.lists.push(this.newList);
+						this.newList = '';
+					},
+					showLists: function(old_show){
+						this.show = !old_show;
+						this.button_I_O = this.button_I_O == 'Show' ? 'Hide':'Show';
+						this.button_I_O_class = this.button_I_O_class == 'btn-success' ? 'btn-danger':'btn-success';
+					},
+					add:function(fruit){
+						fruit.count += 1;
+						this.total_count += 1;
+						this.total_price += fruit.price;
+					},
+					minus:function(fruit){
+						if (fruit.count >= 0) {
+							fruit.count -= 1;
+							this.total_count -= 1;
+							this.total_price -= fruit.price;
+						}
+
+					},
+					count:function(fruit, action){
+						if (action){
+							fruit.count += 1;
+							this.total_count += 1;
+							this.total_price += fruit.price;
+						} else if (fruit.count > 0 && !action) {
+							fruit.count -= 1;
+							this.total_count -= 1;
+							this.total_price -= fruit.price;
+						}
+					},
+				},
+				computed: {
+					convert: {
+						get: function(){
+							return this.km+'KM = '+this.m+'m';
+						},
+						set: function(km_m){
+							var km_m = km_m.split(' = ');
+							this.km = parseFloat(km_m[0]);
+							this.m = parseFloat(km_m[1]);
+						},
+					},
+					FullName: {
+						get: function(){
+							return this.FirstName+' '+this.LastName;
+						},
+						set: function(name){
+							var name = name.split(' ');
+							this.FirstName = name[0];
+							this.LastName = name[name.length - 1];
+						},
+					},
+				},
+				watch: {
+					km: function(val){
+						this.km = val;
+						this.m = val*1000;
+					},
+					m: function(val){
+						this.km = val/1000;
+						this.m = val;
+					},
+				}
+
+			
+			})
+		</script>
+	</body>
+</html>

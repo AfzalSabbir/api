@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>javascript</title>
+	<link rel="stylesheet" href="../bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row mt-5">
+			<div class="col-md-12">
+				<div class="jumbotron">
+					<h1><span id="title">Jumbotron</span> <small><sup><kbd onclick="show()">[edit]</kbd></sup></small></h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab officia itaque non similique consectetur, omnis praesentium libero rerum esse fuga, eos temporibus quae quam, modi qui, animi error dolor nulla.</p>
+					<hr>
+					<div id="edit-container" style="display: none;">
+						<input type="text" id="new_title" class="form-control my-2" onkeyup="change_title(this.value)">
+						<button id="button" class="btn btn-warning" onclick="reset()">Reset</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		console.log('a1as'.replace('/a/ig', 'd') );
+
+		var title = document.getElementById('title').innerHTML;
+
+		function reset(){
+			document.getElementById('new_title').value = '';
+			document.getElementById('title').innerHTML = title;
+		}
+		function show(){
+			document.getElementById('edit-container').style.display = '';
+		}
+		function change_title(data){
+			if (data.length > 0) {
+				document.getElementById('title').innerHTML = data;
+			} else {
+				document.getElementById('title').innerHTML = title;
+			}
+		}
+	</script>
+</body>
+</html>

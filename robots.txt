@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://www.boinaw.com/sitemap1.xml
+Sitemap: https://www.boinaw.com/sitemap2.xml
