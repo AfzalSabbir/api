@@ -1,0 +1,38 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+    RewriteEngine On
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    
+    #RewriteEngine On
+    #RewriteCond %{HTTPS} !on
+    #RewriteRule ^.*$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+
+    # Disable Directory listing
+    Options -Indexes
+
+    # block files which needs to be hidden, specify .example extension of the file
+    <Files ~ "\.(gitignore|gitattributes|yml|artisan|json|lock|env|config.js|md|backup|example|ftpquota)$">
+        Order allow,deny
+        Deny from all
+    </Files>
+
+    # in here specify full file name sperator '|'
+    <Files ~ "(artisan|server.php|phpunit.xml|webpack.mix.js)$">
+        Order allow,deny
+        Deny from all
+    </Files>
+
+</IfModule>

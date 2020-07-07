@@ -1,0 +1,95 @@
+
+if (! function_exists('encrypt_me')) {
+    function encrypt_me($decrypted)
+    {
+        function encrypt_($ax){
+            $b = array_reverse(str_split(base64_encode(rand(100, 999).$ax.rand(10, 99))));
+            $salt = str_split("12345ASDFGHJKLqwertyuiopZXCVBNMasdfghjklQWERTYUIOzxcvbnm67890");
+            $x = [];
+            foreach ($b as $key => $value) {
+                $x[2*$key] = $b[$key];
+                $x[2*$key+1] = $salt[array_rand($salt, true)];
+            }
+            dd($salt[array_rand($salt, true)], implode($b), implode($x));
+            
+            $even_position = [];
+            foreach($b as $key => $value) {
+                if($key%2==0) $even_position[] = $b[$key];
+            }
+            $d1 = base64_decode(implode(array_reverse($even_position)));
+            $s1 = substr($d1, 3);
+            return substr($s1, 0, strlen($s1)-2);
+        }
+        return encrypt_(encrypt_($decrypted));
+    }
+}
+if (! function_exists('decrypt_me')) {
+    function decrypt_me($encrypted)
+    {
+        function encrypt_($ax){
+            $b = str_split($ax);
+            $even_position = [];
+            foreach($b as $key => $value) {
+                if($key%2==0) $even_position[] = $b[$key];
+            }
+            $d1 = base64_decode(implode(array_reverse($even_position)));
+            $s1 = substr($d1, 3);
+            return substr($s1, 0, strlen($s1)-2);
+        }
+        return encrypt_(encrypt_($encrypted));
+    }
+}
+
+
+
+
+
+
+
+
+window.encrypt_me = (decrypted)  => {
+  let a = decrypted;
+  let x = '';
+  let b = [];
+  let s = "12345ASDFGHJKLqwertyuiopZXCVBNMasdfghjklQWERTYUIOzxcvbnm67890";
+  let l = 0;
+  let c = [];
+  let d = 0;
+  let p = '';
+  function encrypt_(ax) {
+    let r1 = generateRandomString(3);
+    let r2 = generateRandomString(2);
+    p = r1+ax+r2;
+    x = btoa(p);
+    b = x.split('').reverse();
+    l = s.length;
+    c = [];
+    d = 0;
+    b.forEach((e, i)=>{
+      d = parseInt((Math.random()*10000))%l;
+      c[2*i] = e;
+      c[2*i+1] = s[d];
+    });
+    return c;
+  }
+  let y = encrypt_(encrypt_(a).join('')).join('');
+  return y;
+}
+window.decrypt_me = (encrypted)  => {
+  let a = encrypted;
+  let b = a.split('');
+  function decrypt_(bx) {
+    let c = [];
+    bx.forEach((e, i)=> {
+      c[i/2] = bx[i]
+    });
+    let r = c.reverse();
+    let j = r.join('');
+    let x = atob(j);
+    let m = x.substr(3); // left salt
+    let n = m.substr(0, m.length-2); //right salt
+    return n.split('');
+  };
+  let y = decrypt_(decrypt_(b)).join('');
+  return y;
+}

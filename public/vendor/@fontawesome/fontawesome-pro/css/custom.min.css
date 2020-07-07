@@ -1,0 +1,52 @@
+@media (min-width: 0px) {
+	.fa,
+	.fab,
+	.fad,
+	.fal,
+	.far,
+	.fas {height: 13px;}
+	.fa-2x {height: 31px !important;}
+	.fa-3x {height: 44.5px !important;}
+	.fa-4x {height: 58px !important;}
+	.fa-5x {height: 73px !important;}
+	.fa-6x {height: 89px !important;}
+	.fa-7x {height: 104px !important;}
+	.fa-8x {height: 117px !important;}
+	.fa-9x {height: 132px !important;}
+	.fa-10x {height: 148px !important;}	
+}
+@media (min-width: 576px) {
+	.fa,
+	.fab,
+	.fad,
+	.fal,
+	.far,
+	.fas {height: 13px;}
+	.fa-2x {height: 31px !important;}
+	.fa-3x {height: 44.5px !important;}
+	.fa-4x {height: 58px !important;}
+	.fa-5x {height: 73px !important;}
+	.fa-6x {height: 89px !important;}
+	.fa-7x {height: 104px !important;}
+	.fa-8x {height: 117px !important;}
+	.fa-9x {height: 132px !important;}
+	.fa-10x {height: 148px !important;}	
+}
+@media (min-width: 768px) {
+	.fa,
+	.fab,
+	.fad,
+	.fal,
+	.far,
+	/* .fas {height: 11px;} */
+	.fas {height: 13px;}
+	.fa-2x {height: 25px !important;}
+	.fa-3x {height: 38.5px !important;}
+	.fa-4x {height: 52px !important;}
+	.fa-5x {height: 63px !important;}
+	.fa-6x {height: 77px !important;}
+	.fa-7x {height: 91px !important;}
+	.fa-8x {height: 104px !important;}
+	.fa-9x {height: 116px !important;}
+	.fa-10x {height: 129px !important;}
+}

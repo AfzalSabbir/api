@@ -1,0 +1,2 @@
+[26-Jun-2020 17:35:41 Asia/Dhaka] PHP Fatal error:  Cannot declare class MyApp\Http\Middleware\HttpsProtocol, because the name is already in use in /home/arsssnboinaw/dev.boinaw.com/app/Http/Middleware/HttpsProtocol.php on line 7
+[26-Jun-2020 17:35:45 Asia/Dhaka] PHP Fatal error:  Cannot declare class MyApp\Http\Middleware\HttpsProtocol, because the name is already in use in /home/arsssnboinaw/dev.boinaw.com/app/Http/Middleware/HttpsProtocol.php on line 7
